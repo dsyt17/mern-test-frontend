@@ -21,8 +21,6 @@ export const Home = () => {
     dispatch(fetchTags());
   }, []);
 
-  console.log(posts);
-
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -39,7 +37,7 @@ export const Home = () => {
               title={obj.title}
               imageUrl={obj.imageUrl ? `${process.env.REACT_APP_API_URL}/${obj.imageUrl}` : ''}
               user={obj.user}
-              createdAt={obj.createdAt}
+              createdAt={(obj.createdAt).toUTCString()}
               viewsCount={obj.viewsCount}
               commentsCount={3}
               tags={obj.tags}            
@@ -49,25 +47,6 @@ export const Home = () => {
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />
-          <CommentsBlock
-            items={[
-              {
-                user: {
-                  fullName: '',
-                  avatarUrl: '',
-                },
-                text: '',
-              },
-              {
-                user: {
-                  fullName: '',
-                  avatarUrl: '',
-                },
-                text: '',
-              },
-            ]}
-            isLoading={false}
-          />
         </Grid>
       </Grid>
     </>
